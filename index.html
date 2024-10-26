@@ -1,0 +1,97 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Pixel Art</title>
+  <style>
+    body {
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      height: 100vh;
+      width: 100vw;
+      background-color: #111010;
+      color: rgb(105, 105, 105);
+      margin: 0;
+      padding: 0;
+    }
+
+    .art-container {
+      display: grid;
+      grid-template-columns: repeat(50, 5px);
+      grid-template-rows: repeat(50, 5px);
+      gap: 0px;
+      width: max-content;
+      margin: 0 auto;
+      padding: 5px;
+      background-color: #333;
+    }
+
+    .pixel {
+      width: 5px;
+      height: 5px;
+      background-color: #000;
+      transition: background-color 0.1s;
+    }
+  </style>
+</head>
+
+<body>
+
+  <h1 style="text-align: center;">PIXEL ART</h1>
+  <div class="art-container" id="artContainer">
+
+  </div>
+
+  <script>
+    const artContainer = document.getElementById('artContainer');
+    const gridSize = 50; // 50x50 grid
+    const pixels = [];
+    let ballPosition = { x: Math.floor(gridSize / 2), y: Math.floor(gridSize / 2) };
+    const speed = 1;
+
+    for (let i = 0; i < gridSize * gridSize; i++) {
+      const pixel = document.createElement('div');
+      pixel.classList.add('pixel');
+      pixels.push(pixel);
+      artContainer.appendChild(pixel);
+    }
+
+    function updateBallPosition() {
+      const direction = Math.floor(Math.random() * 4); // 0: up, 1: down, 2: left, 3: right
+
+      // Move the ball in the chosen direction
+      switch (direction) {
+        case 0:
+          if (ballPosition.y > 0) ballPosition.y -= speed;
+          break;
+        case 1:
+          if (ballPosition.y < gridSize - 1) ballPosition.y += speed;
+          break;
+        case 2:
+          if (ballPosition.x > 0) ballPosition.x -= speed;
+          break;
+        case 3:
+          if (ballPosition.x < gridSize - 1) ballPosition.x += speed;
+          break;
+      }
+
+      // Change color of the pixel
+      const pixelIndex = (ballPosition.y * gridSize) + ballPosition.x;
+      if (pixels[pixelIndex]) {
+        pixels[pixelIndex].style.backgroundColor = `hsl(${(Date.now() / 10) % 360}, 100%, 50%)`;
+      }
+    }
+
+    // Start the animation
+    setInterval(() => {
+      updateBallPosition();
+    }, 0.00001 * 10000);
+
+  </script>
+
+</body>
+
+</html>

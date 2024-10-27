@@ -5,7 +5,45 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Pixel Art</title>
-  <link rel="stylesheet" href="style.css">
+  <style>
+    body {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      height: 100vh;
+      width: 100vw;
+      background-color: #111010;
+      color: rgb(105, 105, 105);
+      margin: 0;
+      padding: 0;
+    }
+
+    .container {
+      display: flex;
+      gap: 20px;
+      flex-wrap: wrap;
+      justify-content: center;
+      align-content: space-around;
+    }
+
+    .art-container {
+      display: grid;
+      grid-template-columns: repeat(50, 3px);
+      grid-template-rows: repeat(50, 3px);
+      gap: 0px;
+      width: max-content;
+      padding: 5px;
+      background-color: #333;
+    }
+
+    .pixel {
+      width: 3px;
+      height: 3px;
+      background-color: #000;
+      transition: background-color 0.1s;
+    }
+  </style>
 </head>
 
 <body>

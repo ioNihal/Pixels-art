@@ -9,6 +9,7 @@
     body {
       display: flex;
       flex-direction: column;
+      align-items: center;
       justify-content: center;
       height: 100vh;
       width: 100vw;
@@ -18,13 +19,17 @@
       padding: 0;
     }
 
+    .container {
+      display: flex;
+      gap: 20px;
+    }
+
     .art-container {
       display: grid;
       grid-template-columns: repeat(50, 5px);
       grid-template-rows: repeat(50, 5px);
       gap: 0px;
       width: max-content;
-      margin: 0 auto;
       padding: 5px;
       background-color: #333;
     }
@@ -41,54 +46,74 @@
 <body>
 
   <h1 style="text-align: center;">PIXEL ART</h1>
-  <div class="art-container" id="artContainer">
-
+  <div class="container">
+    <div class="art-container" id="artContainer1"></div>
+    <div class="art-container" id="artContainer2"></div>
   </div>
 
   <script>
-    const artContainer = document.getElementById('artContainer');
-    const gridSize = 50; // 50x50 grid
-    const pixels = [];
-    let ballPosition = { x: Math.floor(gridSize / 2), y: Math.floor(gridSize / 2) };
-    const speed = 1;
+    const gridSize = 50;
+
+    // Initialize grid and pixels for artContainer1
+    const artContainer1 = document.getElementById('artContainer1');
+    const pixels1 = [];
+    let ballPosition1 = { x: Math.floor(gridSize / 2), y: Math.floor(gridSize / 2) };
 
     for (let i = 0; i < gridSize * gridSize; i++) {
       const pixel = document.createElement('div');
       pixel.classList.add('pixel');
-      pixels.push(pixel);
-      artContainer.appendChild(pixel);
+      pixels1.push(pixel);
+      artContainer1.appendChild(pixel);
     }
 
-    function updateBallPosition() {
-      const direction = Math.floor(Math.random() * 4); // 0: up, 1: down, 2: left, 3: right
-
-      // Move the ball in the chosen direction
+    function randomArt() {
+      const direction = Math.floor(Math.random() * 4);
       switch (direction) {
         case 0:
-          if (ballPosition.y > 0) ballPosition.y -= speed;
+          if (ballPosition1.y > 0) ballPosition1.y -= 1;
           break;
         case 1:
-          if (ballPosition.y < gridSize - 1) ballPosition.y += speed;
+          if (ballPosition1.y < gridSize - 1) ballPosition1.y += 1;
           break;
         case 2:
-          if (ballPosition.x > 0) ballPosition.x -= speed;
+          if (ballPosition1.x > 0) ballPosition1.x -= 1;
           break;
         case 3:
-          if (ballPosition.x < gridSize - 1) ballPosition.x += speed;
+          if (ballPosition1.x < gridSize - 1) ballPosition1.x += 1;
           break;
       }
-
-      // Change color of the pixel
-      const pixelIndex = (ballPosition.y * gridSize) + ballPosition.x;
-      if (pixels[pixelIndex]) {
-        pixels[pixelIndex].style.backgroundColor = `hsl(${(Date.now() / 10) % 360}, 100%, 50%)`;
+      const pixelIndex = (ballPosition1.y * gridSize) + ballPosition1.x;
+      if (pixels1[pixelIndex]) {
+        pixels1[pixelIndex].style.backgroundColor = `hsl(${(Date.now() / 10) % 360}, 100%, 50%)`;
       }
     }
 
-    // Start the animation
+    // Initialize grid and pixels for artContainer2 with a new pattern
+    const artContainer2 = document.getElementById('artContainer2');
+    const pixels2 = [];
+
+    for (let i = 0; i < gridSize * gridSize; i++) {
+      const pixel = document.createElement('div');
+      pixel.classList.add('pixel');
+      pixels2.push(pixel);
+      artContainer2.appendChild(pixel);
+    }
+
+    function wavePattern() {
+      const time = Date.now() / 200;
+      for (let x = 0; x < gridSize; x++) {
+        const y = Math.floor((Math.sin(x / 4 + time) + 1) * gridSize / 2);
+        const pixelIndex = (y * gridSize) + x;
+        if (pixels2[pixelIndex]) {
+          pixels2[pixelIndex].style.backgroundColor = `hsl(${(Date.now() / 10) % 360}, 100%, 50%)`;
+        }
+      }
+    }
+
     setInterval(() => {
-      updateBallPosition();
-    }, 0.00001 * 10000);
+      randomArt();
+      wavePattern();
+    }, 100);
 
   </script>
 

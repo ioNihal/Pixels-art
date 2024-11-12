@@ -26,16 +26,16 @@ body {
   
   .art-container {
     display: grid;
-    grid-template-columns: repeat(50, 8px);
-    grid-template-rows: repeat(50, 8px);
+    grid-template-columns: repeat(50, 3px); /* Adjusted to 3px */
+    grid-template-rows: repeat(50, 3px);    /* Adjusted to 3px */
     gap: 0px;
     padding: 5px;
     background-color: #333;
   }
   
   .pixel {
-    width: 8px;
-    height: 8px;
+    width: 3px;  /* Adjusted to 3px */
+    height: 3px; /* Adjusted to 3px */
     background-color: #000;
     transition: background-color 0.1s;
   }

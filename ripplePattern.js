@@ -1,4 +1,4 @@
-// ripplePattern.js
+
 
 const pixels4 = [];
 const rippleSpeed = 100;

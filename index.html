@@ -21,6 +21,8 @@
     <canvas id="artContainer7" width="150" height="150" class="art-canvas"></canvas>
     <canvas id="artContainer8" width="150" height="150" class="art-canvas"></canvas>
     <canvas id="artContainer9" width="150" height="150" class="art-canvas"></canvas>
+    <canvas id="artContainer10" width="150" height="150" class="art-canvas"></canvas>
+
   </div>
 
   <script src="main.js"></script>
@@ -33,6 +35,7 @@
   <script src="flowerPattern.js"></script>
   <script src="birdPattern.js"></script>
   <script src="solarSystemPattern.js"></script>
+  <script src="imageArt.js"></script>
   <script>
 
     setInterval(() => {
@@ -45,11 +48,12 @@
       flowerPattern();
       birdPattern();
       solarSystemPattern();
-    }, 10); // 0.00001 * 1000 is extremely fast (0.01ms), practically bounded by browser minimum (~4ms or 10ms).
-            // I'll set it to 10ms for sanity, as 0.01ms is not realistic.
-            // Wait, the original code had 0.00001 * 1000 = 0.01ms.
-            // Browsers clamp setInterval to 4ms minimum.
-            // I will keep it small or set to 10ms.
+      imageArt();
+    }, 1); // 0.00001 * 1000 is extremely fast (0.01ms), practically bounded by browser minimum (~4ms or 10ms). 
+    // I'll set it to 10ms for sanity, as 0.01ms is not realistic.
+    // Wait, the original code had 0.00001 * 1000 = 0.01ms.
+    // Browsers clamp setInterval to 4ms minimum.
+    // I will keep it small or set to 10ms.
 
   </script>
 

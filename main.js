@@ -14,9 +14,11 @@ window.ctx6 = document.getElementById('artContainer6').getContext('2d');
 window.ctx7 = document.getElementById('artContainer7').getContext('2d');
 window.ctx8 = document.getElementById('artContainer8').getContext('2d');
 window.ctx9 = document.getElementById('artContainer9').getContext('2d');
+window.ctx10 = document.getElementById('artContainer10').getContext('2d');
+
 
 // Initialize canvases with black background
-const contexts = [window.ctx1, window.ctx2, window.ctx3, window.ctx4, window.ctx5, window.ctx6, window.ctx7, window.ctx8, window.ctx9];
+const contexts = [window.ctx1, window.ctx2, window.ctx3, window.ctx4, window.ctx5, window.ctx6, window.ctx7, window.ctx8, window.ctx9, window.ctx10];
 
 contexts.forEach(ctx => {
     ctx.fillStyle = '#000';

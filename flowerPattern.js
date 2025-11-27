@@ -1,16 +1,9 @@
 // flowerPattern.js
 
-const pixels7 = [];
-for (let i = 0; i < gridSize * gridSize; i++) {
-  const pixel = document.createElement('div');
-  pixel.classList.add('pixel');
-  pixels7.push(pixel);
-  artContainer7.appendChild(pixel); // Assuming artContainer7 is used for the flower pattern
-}
-
 function flowerPattern() {
   // Clear previous frame
-  pixels7.forEach(pixel => pixel.style.backgroundColor = '#000');
+  ctx7.fillStyle = '#000';
+  ctx7.fillRect(0, 0, gridSize * pixelSize, gridSize * pixelSize);
 
   let time = Date.now() * 0.002;  // Use time for animation
 
@@ -32,11 +25,8 @@ function flowerPattern() {
 
     // Check if the pixel is within bounds
     if (gridX >= 0 && gridX < gridSize && gridY >= 0 && gridY < gridSize) {
-      const pixelIndex = gridY * gridSize + gridX;
-      if (pixels7[pixelIndex]) {
-        // Set the color of the pixels to a flower-like color (pink)
-        pixels7[pixelIndex].style.backgroundColor = `hsl(${time % 360}, 100%, 50%)`;
-      }
+        ctx7.fillStyle = `hsl(${time % 360}, 100%, 50%)`;
+        ctx7.fillRect(gridX * pixelSize, gridY * pixelSize, pixelSize, pixelSize);
     }
   }
 }

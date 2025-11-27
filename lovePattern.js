@@ -1,16 +1,9 @@
 
-const pixels6 = [];
-for (let i = 0; i < gridSize * gridSize; i++) {
-  const pixel = document.createElement('div');
-  pixel.classList.add('pixel');
-  pixels6.push(pixel);
-  artContainer6.appendChild(pixel); // Assuming artContainer6 is used for the heart pattern
-}
-
 // Function to create the animated heart pattern
 function lovePattern() {
   // Clear the previous frame
-  pixels6.forEach(pixel => pixel.style.backgroundColor = '#000');
+  ctx6.fillStyle = '#000';
+  ctx6.fillRect(0, 0, gridSize * pixelSize, gridSize * pixelSize);
 
   let time = Date.now() * 0.002; // Use time to animate the heart
 
@@ -25,11 +18,8 @@ function lovePattern() {
 
     // Check if the pixel is within bounds
     if (gridX >= 0 && gridX < gridSize && gridY >= 0 && gridY < gridSize) {
-      const pixelIndex = gridY * gridSize + gridX;
-      if (pixels6[pixelIndex]) {
-        // Set the color of the pixel to a red hue
-        pixels6[pixelIndex].style.backgroundColor = `hsl(0, 100%, 50%)`; // Red color
-      }
+        ctx6.fillStyle = `hsl(0, 100%, 50%)`; // Red color
+        ctx6.fillRect(gridX * pixelSize, gridY * pixelSize, pixelSize, pixelSize);
     }
   }
 }

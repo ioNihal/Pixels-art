@@ -1,20 +1,13 @@
 // birdPattern.js
 
-const pixels8 = [];
-for (let i = 0; i < gridSize * gridSize; i++) {
-  const pixel = document.createElement('div');
-  pixel.classList.add('pixel');
-  pixels8.push(pixel);
-  artContainer8.appendChild(pixel); // Assuming artContainer8 is used for the bird pattern
-}
-
 let birdPosition = { x: 25, y: 25 };  // Starting position of the bird
 let birdDirection = { x: 1, y: 0 };  // Initial movement direction
 let birdFlap = 0;  // Flapping state
 
 function birdPattern() {
   // Clear previous frame
-  pixels8.forEach(pixel => pixel.style.backgroundColor = '#000');
+  ctx8.fillStyle = '#000';
+  ctx8.fillRect(0, 0, gridSize * pixelSize, gridSize * pixelSize);
 
   let time = Date.now() * 0.001;  // Use time to animate the bird
 
@@ -34,10 +27,7 @@ function birdPattern() {
   const gridY = Math.floor(birdPosition.y);
 
   if (gridX >= 0 && gridX < gridSize && gridY >= 0 && gridY < gridSize) {
-    const pixelIndex = gridY * gridSize + gridX;
-    if (pixels8[pixelIndex]) {
-      // Set color for the bird, changing it slightly for animation
-      pixels8[pixelIndex].style.backgroundColor = `hsl(200, 100%, ${50 + birdFlap * 10}%)`;
-    }
+      ctx8.fillStyle = `hsl(200, 100%, ${50 + birdFlap * 10}%)`;
+      ctx8.fillRect(gridX * pixelSize, gridY * pixelSize, pixelSize, pixelSize);
   }
 }

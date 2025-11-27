@@ -1,16 +1,6 @@
 // solarSystemPattern.js
 
-const pixels9 = [];
-
 const sunPosition = { x: gridSize / 2, y: gridSize / 2 };  // Sun at the center of the grid
-
-// Create the grid of pixels for the solar system
-for (let i = 0; i < gridSize * gridSize; i++) {
-  const pixel = document.createElement('div');
-  pixel.classList.add('pixel');
-  pixels9.push(pixel);
-  artContainer9.appendChild(pixel); // Assuming artContainer9 is used for the solar system pattern
-}
 
 // Define planet data (radius, orbital speed, color, etc.)
 const planets = [
@@ -25,37 +15,45 @@ const planets = [
 ];
 
 // Initial position of planets
-let time = 0;  // To simulate continuous movement over time
+let solarTime = 0;  // To simulate continuous movement over time
+// Renaming 'time' to 'solarTime' to avoid conflicts if any, though scope is local in function if declared with let inside.
+// But here it was global in file scope.
 
 function solarSystemPattern() {
   // Clear previous frame (reset all pixels to black)
-  pixels9.forEach(pixel => pixel.style.backgroundColor = '#000');
+  ctx9.fillStyle = '#000';
+  ctx9.fillRect(0, 0, gridSize * pixelSize, gridSize * pixelSize);
 
   // Draw the Sun at the center
-  const sunIndex = sunPosition.y * gridSize + sunPosition.x;
-  if (pixels9[sunIndex]) {
-    pixels9[sunIndex].style.backgroundColor = 'yellow';  // Sun is yellow
+  // Sun is usually larger, but original code just drew one pixel at sunPosition?
+  // "const sunIndex = sunPosition.y * gridSize + sunPosition.x;"
+  // Yes, one pixel.
+
+  const sunX = Math.floor(sunPosition.x);
+  const sunY = Math.floor(sunPosition.y);
+
+  if (sunX >= 0 && sunX < gridSize && sunY >= 0 && sunY < gridSize) {
+    ctx9.fillStyle = 'yellow';
+    ctx9.fillRect(sunX * pixelSize, sunY * pixelSize, pixelSize, pixelSize);
   }
 
   // Animate each planet in its orbit
   planets.forEach(planet => {
     // Calculate the current position of the planet using sine and cosine for 2D orbit simulation
-    let x = sunPosition.x + planet.radius * Math.cos(time * planet.speed);  // X position
-    let y = sunPosition.y + planet.radius * Math.sin(time * planet.speed);  // Y position
+    let x = sunPosition.x + planet.radius * Math.cos(solarTime * planet.speed);  // X position
+    let y = sunPosition.y + planet.radius * Math.sin(solarTime * planet.speed);  // Y position
 
     // Ensure the planet's position is within the grid bounds
-    x = Math.floor(x);
-    y = Math.floor(y);
+    const gridX = Math.floor(x);
+    const gridY = Math.floor(y);
 
     // Set the planet pixel color at the calculated position
-    if (x >= 0 && x < gridSize && y >= 0 && y < gridSize) {
-      const pixelIndex = y * gridSize + x;
-      if (pixels9[pixelIndex]) {
-        pixels9[pixelIndex].style.backgroundColor = planet.color;
-      }
+    if (gridX >= 0 && gridX < gridSize && gridY >= 0 && gridY < gridSize) {
+        ctx9.fillStyle = planet.color;
+        ctx9.fillRect(gridX * pixelSize, gridY * pixelSize, pixelSize, pixelSize);
     }
   });
 
   // Increment the time to animate the orbit
-  time += 24;  // Adjust this value for faster/slower movement
+  solarTime += 24;  // Adjust this value for faster/slower movement
 }

@@ -5,60 +5,22 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Pixel Art</title>
-  <style>
-    body {
-      display: flex;
-      flex-direction: column;
-      align-items: center;
-      justify-content: center;
-      height: 100vh;
-      width: 100vw;
-      background-color: #111010;
-      color: rgb(105, 105, 105);
-      margin: 0;
-      padding: 0;
-    }
-
-    .container {
-      display: flex;
-      gap: 20px;
-      flex-wrap: wrap;
-      justify-content: center;
-      align-content: space-around;
-    }
-
-    .art-container {
-      display: grid;
-      grid-template-columns: repeat(50, 3px);
-      grid-template-rows: repeat(50, 3px);
-      gap: 0px;
-      width: max-content;
-      padding: 5px;
-      background-color: #333;
-    }
-
-    .pixel {
-      width: 3px;
-      height: 3px;
-      background-color: #000;
-      transition: background-color 0.1s;
-    }
-  </style>
+  <link rel="stylesheet" href="style.css">
 </head>
 
 <body>
 
   <h1 style="text-align: center;">PIXEL ART</h1>
   <div class="container">
-    <div class="art-container" id="artContainer1"></div>
-    <div class="art-container" id="artContainer2"></div>
-    <div class="art-container" id="artContainer3"></div>
-    <div class="art-container" id="artContainer4"></div>
-    <div class="art-container" id="artContainer5"></div>
-    <div class="art-container" id="artContainer6"></div>
-    <div class="art-container" id="artContainer7"></div>
-    <div class="art-container" id="artContainer8"></div>
-    <div class="art-container" id="artContainer9"></div>
+    <canvas id="artContainer1" width="150" height="150" class="art-canvas"></canvas>
+    <canvas id="artContainer2" width="150" height="150" class="art-canvas"></canvas>
+    <canvas id="artContainer3" width="150" height="150" class="art-canvas"></canvas>
+    <canvas id="artContainer4" width="150" height="150" class="art-canvas"></canvas>
+    <canvas id="artContainer5" width="150" height="150" class="art-canvas"></canvas>
+    <canvas id="artContainer6" width="150" height="150" class="art-canvas"></canvas>
+    <canvas id="artContainer7" width="150" height="150" class="art-canvas"></canvas>
+    <canvas id="artContainer8" width="150" height="150" class="art-canvas"></canvas>
+    <canvas id="artContainer9" width="150" height="150" class="art-canvas"></canvas>
   </div>
 
   <script src="main.js"></script>
@@ -83,7 +45,11 @@
       flowerPattern();
       birdPattern();
       solarSystemPattern();
-    }, 0.00001 * 1000);
+    }, 10); // 0.00001 * 1000 is extremely fast (0.01ms), practically bounded by browser minimum (~4ms or 10ms).
+            // I'll set it to 10ms for sanity, as 0.01ms is not realistic.
+            // Wait, the original code had 0.00001 * 1000 = 0.01ms.
+            // Browsers clamp setInterval to 4ms minimum.
+            // I will keep it small or set to 10ms.
 
   </script>
 
